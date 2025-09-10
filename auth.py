@@ -10,7 +10,7 @@ class AuthWindow:
         self.on_login_success = on_login_success
         
         self.window = tk.Toplevel(parent)
-        self.window.title("Login / Sign Up")
+        self.window.title("Connexion / Inscription")
         self.window.geometry("450x700")
         self.window.configure(bg=Config.BACKGROUND_COLOR)
         self.window.resizable(False, False)
@@ -30,7 +30,7 @@ class AuthWindow:
         # Title (fixed at top)
         self.title_label = tk.Label(
             main_container,
-            text="Welcome Back!",
+            text="Bon Retour !",
             font=(Config.FONT_FAMILY, 24, "bold"),
             bg=Config.BACKGROUND_COLOR,
             fg=Config.TEXT_PRIMARY
@@ -47,7 +47,7 @@ class AuthWindow:
         # Action button
         self.action_btn = ModernButton(
             button_frame,
-            text="Login",
+            text="Connexion",
             command=self.handle_action,
             style="primary"
         )
@@ -56,7 +56,7 @@ class AuthWindow:
         # Switch mode button
         self.switch_btn = ModernButton(
             button_frame,
-            text="Need an account? Sign up",
+            text="Besoin d'un compte ? Inscrivez-vous",
             command=self.switch_mode,
             style="outline"
         )
@@ -125,7 +125,7 @@ class AuthWindow:
         # Username
         username_label = tk.Label(
             form_content,
-            text="Username:",
+            text="Nom d'utilisateur :",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
             bg=Config.BACKGROUND_COLOR,
             fg=Config.TEXT_PRIMARY,
@@ -133,25 +133,25 @@ class AuthWindow:
         )
         username_label.pack(fill="x", pady=(0, 5))
         
-        self.username_entry = ModernEntry(form_content, placeholder="Enter username")
+        self.username_entry = ModernEntry(form_content, placeholder="Entrez le nom d'utilisateur")
         self.username_entry.pack(fill="x", pady=(0, 15))
         
         # Email (for signup) - initially hidden
         self.email_label = tk.Label(
             form_content,
-            text="Email:",
+            text="Email :",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
             bg=Config.BACKGROUND_COLOR,
             fg=Config.TEXT_PRIMARY,
             anchor="w"
         )
         
-        self.email_entry = ModernEntry(form_content, placeholder="Enter email")
+        self.email_entry = ModernEntry(form_content, placeholder="Entrez l'email")
         
         # Password
         password_label = tk.Label(
             form_content,
-            text="Password:",
+            text="Mot de passe :",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
             bg=Config.BACKGROUND_COLOR,
             fg=Config.TEXT_PRIMARY,
@@ -159,43 +159,43 @@ class AuthWindow:
         )
         password_label.pack(fill="x", pady=(0, 5))
         
-        self.password_entry = ModernEntry(form_content, placeholder="Enter password", show="*")
+        self.password_entry = ModernEntry(form_content, placeholder="Entrez le mot de passe", show="*")
         self.password_entry.pack(fill="x", pady=(0, 15))
         
         # Name fields (for signup) - initially hidden
         self.first_name_label = tk.Label(
             form_content,
-            text="First Name:",
+            text="Prénom :",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
             bg=Config.BACKGROUND_COLOR,
             fg=Config.TEXT_PRIMARY,
             anchor="w"
         )
         
-        self.first_name_entry = ModernEntry(form_content, placeholder="First name")
+        self.first_name_entry = ModernEntry(form_content, placeholder="Prénom")
         
         self.last_name_label = tk.Label(
             form_content,
-            text="Last Name:",
+            text="Nom :",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
             bg=Config.BACKGROUND_COLOR,
             fg=Config.TEXT_PRIMARY,
             anchor="w"
         )
         
-        self.last_name_entry = ModernEntry(form_content, placeholder="Last name")
+        self.last_name_entry = ModernEntry(form_content, placeholder="Nom")
         
         # Phone (for signup) - initially hidden
         self.phone_label = tk.Label(
             form_content,
-            text="Phone (Optional):",
+            text="Téléphone (Optionnel) :",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
             bg=Config.BACKGROUND_COLOR,
             fg=Config.TEXT_PRIMARY,
             anchor="w"
         )
         
-        self.phone_entry = ModernEntry(form_content, placeholder="Enter phone number")
+        self.phone_entry = ModernEntry(form_content, placeholder="Entrez le numéro de téléphone")
         
         # Bind mousewheel to all form elements
         self.bind_mousewheel_to_children(form_content)
@@ -212,17 +212,17 @@ class AuthWindow:
     def update_mode(self):
         """Update UI based on current mode"""
         if self.current_mode == "login":
-            self.title_label.configure(text="Welcome Back!")
-            self.action_btn.configure(text="Login")
-            self.switch_btn.configure(text="Need an account? Sign up")
+            self.title_label.configure(text="Bon Retour !")
+            self.action_btn.configure(text="Connexion")
+            self.switch_btn.configure(text="Besoin d'un compte ? Inscrivez-vous")
             
             # Hide signup fields
             self.hide_signup_fields()
             
         else:  # signup
-            self.title_label.configure(text="Create Account")
-            self.action_btn.configure(text="Sign Up")
-            self.switch_btn.configure(text="Already have an account? Login")
+            self.title_label.configure(text="Créer un Compte")
+            self.action_btn.configure(text="S'inscrire")
+            self.switch_btn.configure(text="Vous avez déjà un compte ? Connectez-vous")
             
             # Show signup fields
             self.show_signup_fields()
@@ -317,17 +317,16 @@ class AuthWindow:
         password = self.password_entry.get_value()
         
         if not username or not password:
-            messagebox.showerror("Error", "Please fill in all fields")
+            messagebox.showerror("Erreur", "Veuillez remplir tous les champs")
             return
         
         user = self.db_manager.authenticate_user(username, password)
         if user:
-            messagebox.showinfo("Success", f"Welcome back, {user['first_name']}!")
+            messagebox.showinfo("Succès", f"Bon retour, {user['first_name']} !")
             if self.on_login_success:
                 self.on_login_success(user)
             self.window.destroy()
         else:
-            messagebox.showerror("Error", "Invalid username or password")
     
     def handle_signup(self):
         """Handle user signup"""
@@ -339,11 +338,11 @@ class AuthWindow:
         phone = self.phone_entry.get_value()
         
         if not all([username, email, password, first_name, last_name]):
-            messagebox.showerror("Error", "Please fill in all required fields")
+            messagebox.showerror("Erreur", "Veuillez remplir tous les champs obligatoires")
             return
         
         if len(password) < 6:
-            messagebox.showerror("Error", "Password must be at least 6 characters")
+            messagebox.showerror("Erreur", "Le mot de passe doit contenir au moins 6 caractères")
             return
         
         success = self.db_manager.create_user(
@@ -351,9 +350,8 @@ class AuthWindow:
         )
         
         if success:
-            messagebox.showinfo("Success", "Account created successfully! You can now log in.")
+            messagebox.showinfo("Succès", "Compte créé avec succès ! Vous pouvez maintenant vous connecter.")
             self.current_mode = "login"
             self.update_mode()
             self.clear_all_fields()
         else:
-            messagebox.showerror("Error", "Username or email already exists")

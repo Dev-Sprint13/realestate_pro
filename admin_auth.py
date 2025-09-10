@@ -10,7 +10,7 @@ class AdminAuthWindow:
         self.on_login_success = on_login_success
         
         self.window = tk.Toplevel(parent)
-        self.window.title("Admin Login")
+        self.window.title("Connexion Admin")
         self.window.geometry("400x300")
         self.window.configure(bg=Config.BACKGROUND_COLOR)
         self.window.resizable(False, False)
@@ -91,15 +91,14 @@ class AdminAuthWindow:
         password = self.password_entry.get_value()
         
         if not username or not password:
-            messagebox.showerror("Error", "Please fill in all fields")
+            messagebox.showerror("Erreur", "Veuillez remplir tous les champs")
             return
         
         # Check admin credentials
         admin = self.db_manager.authenticate_admin(username, password)
         if admin:
-            messagebox.showinfo("Success", f"Welcome, {admin['first_name']}!")
+            messagebox.showinfo("Succès", f"Bienvenue, {admin['first_name']} !")
             if self.on_login_success:
                 self.on_login_success(admin)
             self.window.destroy()
         else:
-            messagebox.showerror("Error", "Invalid admin credentials")

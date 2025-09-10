@@ -94,7 +94,7 @@ class RealEstateApp:
         # Sale/Rent toggle
         self.sale_btn = ModernButton(
             nav_frame,
-            text="For Sale",
+            text="À Vendre",
             command=lambda: self.switch_listing_type("sale"),
             style="secondary" if self.current_listing_type == "sale" else "outline"
         )
@@ -102,7 +102,7 @@ class RealEstateApp:
         
         self.rent_btn = ModernButton(
             nav_frame,
-            text="For Rent",
+            text="À Louer",
             command=lambda: self.switch_listing_type("rent"),
             style="secondary" if self.current_listing_type == "rent" else "outline"
         )
@@ -172,7 +172,7 @@ class RealEstateApp:
         
         self.status_label = tk.Label(
             self.status_bar,
-            text="Ready",
+            text="Prêt",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_SMALL),
             bg=Config.BORDER_COLOR,
             fg=Config.TEXT_SECONDARY,
@@ -190,7 +190,7 @@ class RealEstateApp:
             # User info
             user_info_label = tk.Label(
                 self.user_frame,
-                text=f"Welcome, {self.current_user['first_name']}!",
+                text=f"Bienvenue, {self.current_user['first_name']} !",
                 font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
                 bg=Config.PRIMARY_COLOR,
                 fg="white"
@@ -200,7 +200,7 @@ class RealEstateApp:
             # Profile button
             profile_btn = ModernButton(
                 self.user_frame,
-                text="Profile",
+                text="Profil",
                 command=self.show_profile,
                 style="outline",
                 font=(Config.FONT_FAMILY, Config.FONT_SIZE_SMALL),
@@ -212,7 +212,7 @@ class RealEstateApp:
             # Logout button
             logout_btn = ModernButton(
                 self.user_frame,
-                text="Logout",
+                text="Déconnexion",
                 command=self.logout,
                 style="outline"
             )
@@ -221,7 +221,7 @@ class RealEstateApp:
             # Login button
             login_btn = ModernButton(
                 self.user_frame,
-                text="Login / Sign Up",
+                text="Connexion / Inscription",
                 command=self.show_auth_window,
                 style="outline"
             )
@@ -295,13 +295,13 @@ class RealEstateApp:
             # No properties found
             no_props_label = tk.Label(
                 self.properties_frame,
-                text="No properties found matching your criteria.",
+                text="Aucune propriété trouvée correspondant à vos critères.",
                 font=(Config.FONT_FAMILY, Config.FONT_SIZE_LARGE),
                 bg=Config.BACKGROUND_COLOR,
                 fg=Config.TEXT_SECONDARY
             )
             no_props_label.grid(row=0, column=0, columnspan=3, pady=50)
-            self.update_status("No properties found")
+            self.update_status("Aucune propriété trouvée")
             return
         
         # Configure grid columns to be equal width
@@ -336,7 +336,7 @@ class RealEstateApp:
             property_card.grid_propagate(False)
         
         # Update status
-        self.update_status(f"Found {len(properties)} properties")
+        self.update_status(f"{len(properties)} propriétés trouvées")
         
         # Update canvas scroll region
         self.properties_frame.update_idletasks()
@@ -347,7 +347,7 @@ class RealEstateApp:
         if action_type == "transaction":
             # Quick transaction action
             if not self.current_user:
-                messagebox.showwarning("Login Required", "Please log in to perform this action.")
+                messagebox.showwarning("Connexion Requise", "Veuillez vous connecter pour effectuer cette action.")
                 self.show_auth_window()
                 return
             
@@ -370,7 +370,7 @@ class RealEstateApp:
         self.status_label.configure(text=message)
         
         # Auto-clear status after 5 seconds
-        self.root.after(5000, lambda: self.status_label.configure(text="Ready"))
+        self.root.after(5000, lambda: self.status_label.configure(text="Prêt"))
     
     def run(self):
         """Run the application"""

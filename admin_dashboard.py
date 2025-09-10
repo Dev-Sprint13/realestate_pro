@@ -47,7 +47,7 @@ class AdminDashboard:
         # Title
         title_label = tk.Label(
             header_content,
-            text="Admin Dashboard",
+            text="Tableau de Bord Admin",
             font=(Config.FONT_FAMILY, 18, "bold"),
             bg=Config.PRIMARY_COLOR,
             fg="white"
@@ -57,7 +57,7 @@ class AdminDashboard:
         # Admin info
         admin_info = tk.Label(
             header_content,
-            text=f"Welcome, {self.admin_user['first_name']} {self.admin_user['last_name']}",
+            text=f"Bienvenue, {self.admin_user['first_name']} {self.admin_user['last_name']}",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_MEDIUM),
             bg=Config.PRIMARY_COLOR,
             fg="white"
@@ -67,7 +67,7 @@ class AdminDashboard:
         # Logout button
         logout_btn = ModernButton(
             header_content,
-            text="Logout",
+            text="Déconnexion",
             command=self.logout,
             style="outline"
         )
@@ -124,7 +124,7 @@ class AdminDashboard:
         
         activity_header = tk.Label(
             activity_frame,
-            text="Recent Activity",
+            text="Activité Récente",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_LARGE, "bold"),
             bg=Config.CARD_COLOR,
             fg=Config.TEXT_PRIMARY
@@ -181,7 +181,7 @@ class AdminDashboard:
     def create_quick_actions_tab(self):
         """Create quick actions tab"""
         actions_frame = tk.Frame(self.notebook, bg=Config.BACKGROUND_COLOR)
-        self.notebook.add(actions_frame, text="Quick Actions")
+        self.notebook.add(actions_frame, text="Actions Rapides")
         
         # Actions grid
         actions_container = tk.Frame(actions_frame, bg=Config.BACKGROUND_COLOR)
@@ -189,10 +189,10 @@ class AdminDashboard:
         
         # Management buttons
         management_buttons = [
-            ("Manage Properties", self.open_property_management, Config.PRIMARY_COLOR),
-            ("Manage Users", self.open_user_management, Config.SECONDARY_COLOR),
-            ("View Transactions", self.open_transaction_management, Config.ACCENT_COLOR),
-            ("Analytics Dashboard", self.open_analytics, Config.SUCCESS_COLOR)
+            ("Gérer les Propriétés", self.open_property_management, Config.PRIMARY_COLOR),
+            ("Gérer les Utilisateurs", self.open_user_management, Config.SECONDARY_COLOR),
+            ("Voir les Transactions", self.open_transaction_management, Config.ACCENT_COLOR),
+            ("Tableau de Bord Analytique", self.open_analytics, Config.SUCCESS_COLOR)
         ]
         
         for i, (text, command, color) in enumerate(management_buttons):
@@ -217,7 +217,7 @@ class AdminDashboard:
     def create_system_info_tab(self):
         """Create system information tab"""
         info_frame = tk.Frame(self.notebook, bg=Config.BACKGROUND_COLOR)
-        self.notebook.add(info_frame, text="System Info")
+        self.notebook.add(info_frame, text="Info Système")
         
         # System info content
         info_content = tk.Frame(info_frame, bg=Config.CARD_COLOR, relief="solid", borderwidth=1)
@@ -225,7 +225,7 @@ class AdminDashboard:
         
         info_header = tk.Label(
             info_content,
-            text="System Information",
+            text="Informations Système",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_LARGE, "bold"),
             bg=Config.CARD_COLOR,
             fg=Config.TEXT_PRIMARY
@@ -234,12 +234,12 @@ class AdminDashboard:
         
         # System details
         system_info = [
-            ("Application Name", Config.APP_NAME),
+            ("Nom de l'Application", Config.APP_NAME),
             ("Version", Config.VERSION),
-            ("Database Host", Config.DB_HOST),
-            ("Database Name", Config.DB_NAME),
-            ("Admin User", f"{self.admin_user['first_name']} {self.admin_user['last_name']}"),
-            ("Admin Email", self.admin_user['email'])
+            ("Hôte Base de Données", Config.DB_HOST),
+            ("Nom Base de Données", Config.DB_NAME),
+            ("Utilisateur Admin", f"{self.admin_user['first_name']} {self.admin_user['last_name']}"),
+            ("Email Admin", self.admin_user['email'])
         ]
         
         for label, value in system_info:
@@ -273,7 +273,7 @@ class AdminDashboard:
         
         self.status_label = tk.Label(
             self.status_bar,
-            text="Admin Dashboard Ready",
+            text="Tableau de Bord Admin Prêt",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_SMALL),
             bg=Config.BORDER_COLOR,
             fg=Config.TEXT_SECONDARY,
@@ -300,11 +300,9 @@ class AdminDashboard:
             for activity in activities:
                 self.activity_listbox.insert(tk.END, activity)
             
-            self.update_status("Dashboard data loaded successfully")
+            self.update_status("Données du tableau de bord chargées avec succès")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to load dashboard data: {str(e)}")
-            self.update_status("Error loading dashboard data")
     
     def open_property_management(self):
         """Open property management window"""
@@ -324,11 +322,10 @@ class AdminDashboard:
     
     def logout(self):
         """Handle admin logout"""
-        result = messagebox.askyesno("Logout", "Are you sure you want to logout?")
+        result = messagebox.askyesno("Déconnexion", "Êtes-vous sûr de vouloir vous déconnecter ?")
         if result:
             self.window.destroy()
     
     def update_status(self, message):
         """Update status bar message"""
         self.status_label.configure(text=message)
-        self.window.after(5000, lambda: self.status_label.configure(text="Admin Dashboard Ready"))

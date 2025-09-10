@@ -248,7 +248,7 @@ class PropertyCard(tk.Frame):
         # View Details button (smaller)
         view_btn = ModernButton(
             button_frame,
-            text="Details",
+            text="Détails",
             command=lambda: self.on_click(self.property_data, action_type="view") if self.on_click else None,
             style="primary",
             font=(Config.FONT_FAMILY, Config.FONT_SIZE_SMALL, "bold"),
@@ -258,7 +258,7 @@ class PropertyCard(tk.Frame):
         view_btn.pack(side="left", padx=(0, 5))
         
         # Quick action button (smaller)
-        action_text = "Buy" if self.property_data['listing_type'] == 'sale' else "Rent"
+        action_text = "Acheter" if self.property_data['listing_type'] == 'sale' else "Louer"
         action_style = "success" if self.property_data['listing_type'] == 'sale' else "accent"
         
         action_btn = ModernButton(
