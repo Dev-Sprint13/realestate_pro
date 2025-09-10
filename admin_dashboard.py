@@ -14,7 +14,7 @@ class AdminDashboard:
         self.admin_user = admin_user
         
         self.window = tk.Toplevel(parent)
-        self.window.title("RealEstate Pro - Admin Dashboard")
+        self.window.title("RealEstate Pro - Tableau de Bord Admin")
         self.window.geometry("1400x900")
         self.window.configure(bg=Config.BACKGROUND_COLOR)
         
